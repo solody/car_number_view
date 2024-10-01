@@ -204,7 +204,7 @@ class _CarNumberKeyViewState extends State<CarNumberKeyView> {
             height: double.infinity,
             width: double.infinity,
             child: text == mDelete ?
-            Image.asset("lib/images/icon_rollback.png" , width: 23 , height: 17,):
+            Image.asset("packages/car_number_view/images/icon_rollback.png" , width: 23 , height: 17,):
             Text(text, style:
               TextStyle(color: text == 'I' ? Color(0XFFB7BABC) : color_00131D
                   , fontSize: (18)),
