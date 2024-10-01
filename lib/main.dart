@@ -67,11 +67,11 @@ class _MyHomePageState extends State<MyHomePage> {
 
 
           ButtonView(() {
-            openCarNumberViewDialog(context, mCarNumber.value);
+            openCarNumberViewDialog(context, mCarNumber);
           }, "底部弹框-车牌号"),
 
           ButtonView(() {
-            openCarNumberViewDialogNew(context, mCarNumber.value);
+            openCarNumberViewDialogNew(context, mCarNumber);
           }, "底部弹框(可选择焦点)-车牌号"),
 
           ButtonView(() {
@@ -84,7 +84,7 @@ class _MyHomePageState extends State<MyHomePage> {
           }, "键盘弹框页面"),
 
           ButtonView(() {
-            openAddCarNumberRoute(context , mCarNumber.value);
+            openAddCarNumberRoute(context , mCarNumber);
           }, "新页面添加车牌号"),
 
           ButtonView(() {

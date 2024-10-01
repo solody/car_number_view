@@ -6,15 +6,15 @@ import 'package:flutter/material.dart';
 import '../utils/color_res.dart';
 
 //通过路由的方式打开
-openAddCarNumberRoute(BuildContext context , String carN) {
+openAddCarNumberRoute(BuildContext context , ValueNotifier<String> carN) {
   Navigator.push(context, CupertinoPageRoute(builder: (context) {
     return AddCarnumberPage(carN);
   }));
 }
 
 class AddCarnumberPage extends StatefulWidget {
-  const AddCarnumberPage(this.car_number , {Key? key}) : super(key: key);
-  final String? car_number;
+  const AddCarnumberPage(this.carNumber , {Key? key}) : super(key: key);
+  final ValueNotifier<String> carNumber;
 
   @override
   State<AddCarnumberPage> createState() => _AddCarnumberPageState();
@@ -37,7 +37,7 @@ class _AddCarnumberPageState extends State<AddCarnumberPage> with SingleTickerPr
   Animation<Offset>? _animation;
   @override
   void initState() {
-    _carController.text = widget.car_number??'';
+    _carController.text = widget.carNumber.value??'';
     _animationController =
         AnimationController(duration: const Duration(milliseconds: 300), vsync: this);
     _animation = Tween( begin: const Offset(0.0, 1.0),

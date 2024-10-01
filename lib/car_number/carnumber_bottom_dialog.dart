@@ -7,7 +7,7 @@ import '../utils/string_utils.dart';
 import 'carnumber_constants.dart';
 
 
-openCarNumberViewDialog(BuildContext context , String carNumber){
+openCarNumberViewDialog(BuildContext context , ValueNotifier<String> carNumber){
   showModalBottomSheet(context: context,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
       builder: (w){
@@ -15,7 +15,7 @@ openCarNumberViewDialog(BuildContext context , String carNumber){
   });
 }
 //通过路由的方式打开
-openCarNumberViewRoute(BuildContext context , String carNumber){
+openCarNumberViewRoute(BuildContext context , ValueNotifier<String> carNumber){
   Navigator.push(context, PageRouteBuilder(
     opaque: false,
     pageBuilder: (context, animation, secondaryAnimation){
@@ -34,9 +34,9 @@ openCarNumberViewRoute(BuildContext context , String carNumber){
 
 ///车牌号数据框+车牌号键盘-底部弹框
 class CarNumberKeyView extends StatefulWidget {
-  const CarNumberKeyView(this.car_number , {Key? key}) : super(key: key);
+  const CarNumberKeyView(this.carNumber , {Key? key}) : super(key: key);
 
-  final String? car_number;
+  final ValueNotifier<String> carNumber;
 
   @override
   State<CarNumberKeyView> createState() => _CarNumberKeyViewState();
@@ -55,7 +55,7 @@ class _CarNumberKeyViewState extends State<CarNumberKeyView> {
   @override
   initState(){
     super.initState();
-    carNumber = widget.car_number??'';
+    carNumber = widget.carNumber.value??'';
     isInputABC = carNumber.isNotEmpty;
   }
 
@@ -84,7 +84,7 @@ class _CarNumberKeyViewState extends State<CarNumberKeyView> {
                   Text("编辑车牌" , style: TextStyle(color: color_00131D , fontSize: (16)),),
                   InkWell(
                     onTap: carNumber.length > 6 ?(){
-                      mCarNumber.value = carNumber;
+                      widget.carNumber.value = carNumber;
                       Navigator.pop(context);
                     } : null,
                     child: Container(

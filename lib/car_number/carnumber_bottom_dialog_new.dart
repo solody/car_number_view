@@ -7,7 +7,7 @@ import '../utils/string_utils.dart';
 import 'carnumber_constants.dart';
 
 
-openCarNumberViewDialogNew(BuildContext context , String carNumber){
+openCarNumberViewDialogNew(BuildContext context , ValueNotifier<String> carNumber){
   showModalBottomSheet(context: context,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
       builder: (w){
@@ -17,9 +17,9 @@ openCarNumberViewDialogNew(BuildContext context , String carNumber){
 
 ///车牌号数据框+车牌号键盘-底部弹框
 class CarNumberKeyViewNew extends StatefulWidget {
-  const CarNumberKeyViewNew(this.car_number , {Key? key}) : super(key: key);
+  const CarNumberKeyViewNew(this.carNumber , {Key? key}) : super(key: key);
 
-  final String? car_number;
+  final ValueNotifier<String> carNumber;
 
   @override
   State<CarNumberKeyViewNew> createState() => _CarNumberKeyViewNewState();
@@ -40,7 +40,7 @@ class _CarNumberKeyViewNewState extends State<CarNumberKeyViewNew> {
   @override
   initState(){
     super.initState();
-    carNumber = StringUtils.stringToStringList(widget.car_number??'');
+    carNumber = StringUtils.stringToStringList(widget.carNumber.value??'');
     currentIndex = carNumber.length;
     isInputABC = carNumber.isNotEmpty;
     for(int i = 0; i < maxCarNumberLength - currentIndex ; i++){
@@ -73,7 +73,7 @@ class _CarNumberKeyViewNewState extends State<CarNumberKeyViewNew> {
                   Text("编辑车牌" , style: TextStyle(color: color_00131D , fontSize: (16)),),
                   InkWell(
                     onTap: StringUtils.stringListToString(carNumber).length > 6 ?(){
-                      mCarNumber.value = StringUtils.stringListToString(carNumber);
+                      widget.carNumber.value = StringUtils.stringListToString(carNumber);
                       Navigator.pop(context);
                     } : null,
                     child: Container(

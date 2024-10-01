@@ -7,7 +7,7 @@ import 'carnumber_constants.dart';
 
 
 //通过路由的方式打开
-openCarNumberKeyboardRoute(BuildContext context , String? cn , CarNumberChanged carNumberChanged){
+openCarNumberKeyboardRoute(BuildContext context , String cn , CarNumberChanged carNumberChanged){
   Navigator.push(context, PageRouteBuilder(
     opaque: false,
     pageBuilder: (context, animation, secondaryAnimation){
@@ -17,7 +17,7 @@ openCarNumberKeyboardRoute(BuildContext context , String? cn , CarNumberChanged 
             backgroundColor: Colors.black38,
             body: Align(
                 alignment: AlignmentDirectional.bottomCenter,
-                child: CarNumberKeyboard(cn ??'', carNumberChanged))),
+                child: CarNumberKeyboard(cn, carNumberChanged))),
       );
 
     },
@@ -29,10 +29,10 @@ typedef CarNumberChanged = Function(String carNumber , String value);
 
 ///车牌号格式键盘
 class CarNumberKeyboard extends StatefulWidget {
-  const CarNumberKeyboard(this.car_number , this.carNumberChanged , {Key? key}) : super(key: key);
+  const CarNumberKeyboard(this.carNumber , this.carNumberChanged , {Key? key}) : super(key: key);
 
   final CarNumberChanged carNumberChanged;
-  final String car_number;
+  final String carNumber;
 
   @override
   State<CarNumberKeyboard> createState() => _CarNumberKeyboardState();
@@ -51,7 +51,7 @@ class _CarNumberKeyboardState extends State<CarNumberKeyboard> {
   @override
   initState(){
     super.initState();
-    carNumber = widget.car_number;
+    carNumber = widget.carNumber;
     isInputABC = carNumber.isNotEmpty;
   }
 
